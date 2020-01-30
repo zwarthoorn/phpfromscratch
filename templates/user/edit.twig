@@ -1,0 +1,67 @@
+{% extends 'base.twig' %}
+
+{% block title %}Registreer{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+
+    <div class="d-flex justify-content-center">
+        <form action="/save/{{ userId }}" method="POST">
+            <div class="d-flex p-1">
+                <div class="d-flex p-1">
+                    <label for="password">Email adres* </label>
+                </div>
+                <input type="email" name="Email" value="{{ email }}" placeholder="voorbeeld@voorbeeld.com">
+            </div>
+            <div class="d-flex p-1">
+                <div class="d-flex p-1">
+                    <label for="password">Wachtwoord* </label>
+                </div>
+                <input type="password" name="password" placeholder="wachtwoord">
+            </div>
+            <div class="d-flex p-1">
+                <div class="d-flex p-1">
+                    <label for="password">Voornaam* </label>
+                </div>
+                <input type="text" name="firstname" value="{{ firstname }}" placeholder="Piet">
+            </div>
+            <div class="d-flex p-1">
+                <div class="d-flex p-1">
+                    <label for="password">Achternaam* </label>
+                </div>
+                <input type="text" name="surname" value="{{ lastname }}" placeholder="Hein">
+            </div>
+            <div class="d-flex p-1">
+                <div class="d-flex p-1">
+                    Wat is je favourite drankje?
+                </div>
+            </div>
+            <div class="d-flex p-1">
+                <div class="d-flex p-1">
+                    <label for="password">Antwoord* </label>
+                </div>
+                <input type="password" name="secret" placeholder="Je super geheime antwoord">
+                <div class="d-flex p-1">
+                    <button>Save</button>
+                </div>
+                {% if errors is null %}
+                    <div class="d-flex p-2">
+                        {% for errors in error %}
+                            <p>error - {{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <input type="hidden" value="{{ userId }}">
+
+        </form>
+    </div>
+
+    <div>
+        <button><a href="/logout">
+                logout
+            </a></button>
+    </div>
+
+{% endblock %}

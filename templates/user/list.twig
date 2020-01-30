@@ -1,0 +1,66 @@
+{% extends 'base.twig' %}
+
+{% block title %}Registreer{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+
+    <div class="d-flex justify-content-center">
+
+        <div class="d-flex p-1">
+            <form action="/list">
+                <select name="column" id="column">
+                    <option value="id">id</option>
+                    <option value="firstname">firstname</option>
+                    <option value="lastname">lastname</option>
+                    <option value="email">email</option>
+                    <option value="deleted">deleted</option>
+                </select>
+                <input type="text" name="search">
+                <button>search</button>
+            </form>
+        </div>
+        <div class="d-flex p-1">
+
+
+            <table>
+                <tr>
+                    <th>id</th>
+                    <th>firstname</th>
+                    <th>lastname</th>
+                    <th>email</th>
+                    <th>admin</th>
+                    <th>deleted</th>
+                    <th>edit</th>
+                    <th>actions</th>
+                </tr>
+
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.firstname }}</td>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.admin }}</td>
+                        <td>{{ user.deleted }}</td>
+                        <td>
+                            <button><a href="/edit/{{ user.id }}">Edit</a></button>
+                        </td>
+                        <td>
+                            <button><a href="/makeadmin/{{ user.id }}">make Admin</a></button>
+                            <button><a href="/delete/{{ user.id }}">Delete</a></button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div>
+        <button><a href="/logout">
+                logout
+            </a></button>
+    </div>
+
+{% endblock %}

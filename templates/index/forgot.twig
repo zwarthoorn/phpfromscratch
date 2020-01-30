@@ -1,0 +1,42 @@
+{% extends 'base.twig' %}
+
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+
+    <div class="d-flex justify-content-center">
+        <form action="/getnewpassword" method="POST">
+            <div class="d-flex p-1">
+                <div class="d-flex p-1">
+                    <label for="user">Email* </label>
+                </div>
+                <input type="text" name="email" placeholder="gebruikersnaam">
+            </div>
+            <div class="d-flex p-1">
+                <div class="d-flex p-1">
+                    Wat is je favourite drankje?
+                </div>
+            </div>
+            <div class="d-flex p-1">
+                <div class="d-flex p-1">
+                    <label for="password">Antwoord* </label>
+                </div>
+                <input type="password" name="secret" placeholder="Je super geheime antwoord">
+            </div>
+            <div class="d-flex p-1">
+                <button>Krijg Wachtwoord</button>
+            </div>
+            {% if errors is null %}
+                <div class="d-flex p-2">
+                    {% for errors in error %}
+                        <p>error - {{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+        </form>
+    </div>v>
+
+{% endblock %}

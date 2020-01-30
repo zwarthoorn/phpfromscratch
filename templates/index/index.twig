@@ -1,0 +1,46 @@
+{% extends 'base.twig' %}
+
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+
+    <div class="d-flex justify-content-center">
+        <form action="/login" method="POST">
+            <div class="d-flex p-1">
+                <div class="d-flex p-1">
+                    <label for="user">Email* </label>
+                </div>
+                <input type="text" name="email" placeholder="gebruikersnaam">
+            </div>
+            <div class="d-flex p-1">
+                <div class="d-flex p-1">
+                    <label for="password">Wachtwoord* </label>
+                </div>
+                <input type="password" name="password" placeholder="wachtwoord">
+            </div>
+            <div class="d-flex p-1">
+                <button>Login</button>
+            </div>
+            {% if errors is null %}
+                <div class="d-flex p-2">
+                    {% for errors in error %}
+                        <p>error - {{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+        </form>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="d-inline-flex p-2">
+            <a href="/vergeten">Wachtwoord Vergeten</a>
+        </div>
+        <div class="d-inline-flex p-2">
+            <a href="/register">Registreer</a>
+        </div>
+    </div>
+
+{% endblock %}

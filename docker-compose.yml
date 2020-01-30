@@ -1,0 +1,56 @@
+###############################################################################
+#                          Generated on phpdocker.io                          #
+###############################################################################
+version: "3.1"
+services:
+
+    redis:
+      image: redis:alpine
+      container_name: phpopdracht-redis
+
+    mysql:
+      image: mysql:5.7
+      container_name: phpopdracht-mysql
+      working_dir: /application
+      volumes:
+        - .:/application
+        - ./data/mysql:/var/lib/mysql
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=mail
+        - MYSQL_USER=root
+        - MYSQL_PASSWORD=root
+      ports:
+        - "3002:3306"
+
+    phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      restart: always
+      ports:
+        - '8080:80'
+      environment:
+        PMA_HOSTS: localhost
+        MYSQL_ROOT_PASSWORD: root
+      links:
+        - mysql
+
+    webserver:
+      image: nginx:alpine
+      container_name: phpopdracht-webserver
+      working_dir: /application
+      volumes:
+          - .:/application
+          - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+       - "3000:80"
+
+    php-fpm:
+      build: phpdocker/php-fpm
+      container_name: phpopdracht-php-fpm
+      working_dir: /application
+      volumes:
+        - .:/application
+        - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
+      links:
+        - mysql
+
