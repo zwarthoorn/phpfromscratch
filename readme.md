@@ -1,5 +1,12 @@
 Php opdracht
 ==
+belangrijk
+==
+
+draai eerst composer install in het project ik lever niet de vendor mee.
+
+Het project
+==
 
 Bijgeleverd is een map met een project en een docker compose.
 
